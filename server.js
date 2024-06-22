@@ -30,11 +30,7 @@ app.use(Express.json());
 app.use(morgan("dev"));
 
 // deployment
-app.use(Express.static(path.join(__dirname, './client/build')))
-
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-})
+app.use(Express.static(path.join(__dirname, './client/build')));
 
 // app.use(formidableMiddleware());
 
