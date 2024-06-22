@@ -9,6 +9,10 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import path from 'path'
 import { fileURLToPath } from "url";
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 // import formidableMiddleware from 'express-formidable';
 
 // configure env
@@ -30,6 +34,7 @@ app.use(Express.json());
 app.use(morgan("dev"));
 
 // deployment
+
 app.use(Express.static(path.join(__dirname, './client/build')));
 
 // app.use(formidableMiddleware());
@@ -43,9 +48,9 @@ app.use("/api/v1/product", productRoutes);
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to Ecommerce website</h1>");
 });
-// app.use('*', function(req, res){
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// })
+app.use('*', function(req, res){
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+})
 
 // port
 const PORT = process.env.PORT || 3000;
